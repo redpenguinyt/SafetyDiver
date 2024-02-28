@@ -1,0 +1,5 @@
+name=Base Project
+author=Red Penguin
+description=A game outline in pure C
+bundleID=io.github.redpenguinyt.base_project
+imagePath=
