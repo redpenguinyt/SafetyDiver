@@ -31,9 +31,9 @@ set(PLAYDATE_GAME_DEVICE BaseProject_DEVICE)
 project(${PLAYDATE_GAME_NAME} C ASM)
 
 if (TOOLCHAIN STREQUAL "armgcc")
-	add_executable(${PLAYDATE_GAME_DEVICE} main.c game.c )
+	add_executable(${PLAYDATE_GAME_DEVICE} main.c )
 else()
-	add_library(${PLAYDATE_GAME_NAME} SHARED main.c game.c )
+	add_library(${PLAYDATE_GAME_NAME} SHARED main.c )
 endif()
 
 include(${SDK}/C_API/buildsupport/playdate_game.cmake)
