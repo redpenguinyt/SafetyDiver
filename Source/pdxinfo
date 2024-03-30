@@ -1,5 +1,5 @@
 name=Playdate Template
 author=Red Penguin
 description=A game template for the Playdate handheld console
-bundleID=io.github.redpenguinyt.playdate_template
+bundleID=com.example.playdate_template
 imagePath=
