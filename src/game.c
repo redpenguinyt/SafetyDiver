@@ -18,8 +18,6 @@ void setup(PlaydateAPI *p) {
 }
 
 int update(void *ud) {
-	// Game logic goes here!
-
 	char str[] = "Hello world!";
 	pd->graphics->drawText(str, strlen(str), kASCIIEncoding, LCD_COLUMNS / 2, LCD_ROWS / 2);
 

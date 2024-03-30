@@ -13,8 +13,8 @@ ifeq ($(SDK),)
 $(error SDK path not found; set ENV value PLAYDATE_SDK_PATH)
 endif
 
-# List all source files here
-SRC = main.c game.c
+# Get all c files in src directory as source files
+SRC = $(shell find src/ -name '*.c')
 
 # List all user directories here
 UINCDIR =
