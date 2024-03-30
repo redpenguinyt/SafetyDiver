@@ -1,5 +1,5 @@
-name=Base Project
+name=Playdate Template
 author=Red Penguin
-description=A game outline in pure C
-bundleID=io.github.redpenguinyt.base_project
+description=A game template for the Playdate handheld console
+bundleID=io.github.redpenguinyt.playdate_template
 imagePath=
