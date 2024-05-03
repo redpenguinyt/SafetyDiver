@@ -5,8 +5,6 @@
 #ifndef game_h
 #define game_h
 
-#include <stdio.h>
-
 #define TARGET_EXTENSION 1
 #include "pd_api.h"
 
