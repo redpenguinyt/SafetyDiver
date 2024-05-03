@@ -21,6 +21,10 @@ LCDBitmap *loadImageAtPath(PlaydateAPI *pd, const char *path);
 #define lazyLoadImageAtPath( VAR, FILE ) \
   static LCDBitmap* VAR = NULL; \
   if (VAR == NULL) VAR = loadImageAtPath(pd, FILE);
+LCDBitmapTable *loadSpritesheetAtPath(PlaydateAPI *pd, const char *path);
+#define lazyLoadSpritesheetAtPath( VAR, FILE ) \
+  static LCDBitmapTable* VAR = NULL; \
+  if (VAR == NULL) VAR = loadSpritesheetAtPath(pd, FILE);
 
 bool isPosOnScreen(int x, int y);
 

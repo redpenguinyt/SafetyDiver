@@ -24,7 +24,15 @@ void drawWater(void) {
 	pd->graphics->drawLine(0, WATER_LEVEL, LCD_COLUMNS, WATER_LEVEL, 1, 0);
 }
 
-void drawPlayer(Player player, float degrees) {
-	lazyLoadImageAtPath(playerImage, "images/player.png");
-	pd->graphics->drawRotatedBitmap(playerImage, player.pos.x, player.pos.y, degrees, 0.5, 0.4, 1.5, 1.5);
+void drawPlayer(Player player, float degrees, float rudderSpeed) {
+	lazyLoadSpritesheetAtPath(playerImageTable, "images/player");
+
+	static float frame = 0;
+	frame += rudderSpeed / 10.0;
+	if (floorf(frame) > 3) {
+		frame = 0;
+	}
+
+	LCDBitmap* playerFrame = pd->graphics->getTableBitmap(playerImageTable, (int)floorf(frame));
+	pd->graphics->drawRotatedBitmap(playerFrame, player.pos.x, player.pos.y, degrees, 0.5, 0.4, 1.5, 1.5);
 }

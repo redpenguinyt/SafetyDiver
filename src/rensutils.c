@@ -16,5 +16,13 @@ LCDBitmap *loadImageAtPath(PlaydateAPI *pd, const char *path) {
 	}
 	return img;
 }
+LCDBitmapTable *loadSpritesheetAtPath(PlaydateAPI *pd, const char *path) {
+	const char *outErr = NULL;
+	LCDBitmapTable *img = pd->graphics->loadBitmapTable(path, &outErr);
+	if (outErr != NULL) {
+		pd->system->logToConsole("Error loading spritesheet at path '%s': %s", path, outErr);
+	}
+	return img;
+}
 
 bool isPosOnScreen(int x, int y) { return x >= 0 && x < LCD_COLUMNS && y >= 0 && y < LCD_ROWS; }

@@ -31,11 +31,12 @@ int update(void *ud) {
 	pd->system->resetElapsedTime();
 	pd->graphics->clear(1);
 
+	float rudderStrength = 0.0;
 	float crankAngle = pd->system->getCrankAngle();
 	PDButtons pressed;
 	pd->system->getButtonState(&pressed, NULL, NULL);
 	if (pressed & kButtonB) {
-		float rudderStrength = 5.0;
+		rudderStrength = 5.0;
 		if (player.pos.y < WATER_LEVEL) {
 			rudderStrength = 2.0;
 		}
@@ -45,7 +46,7 @@ int update(void *ud) {
 	processPlayerPhysics(&player, deltaTime);
 
 	drawWater();
-	drawPlayer(player, crankAngle);
+	drawPlayer(player, crankAngle, rudderStrength);
 
 	return 1;
 }
