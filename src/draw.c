@@ -20,7 +20,7 @@ void setupDraw(PlaydateAPI *p) {
 }
 
 void drawWater(void) {
-	pd->graphics->fillRect(0, WATER_LEVEL, LCD_COLUMNS, LCD_ROWS - WATER_LEVEL, grey20);
+	pd->graphics->fillRect(0, WATER_LEVEL, LCD_COLUMNS, LCD_ROWS - WATER_LEVEL, (LCDColor)grey20);
 	pd->graphics->drawLine(0, WATER_LEVEL, LCD_COLUMNS, WATER_LEVEL, 1, 0);
 }
 
