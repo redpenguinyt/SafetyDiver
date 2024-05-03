@@ -28,7 +28,7 @@ void drawPlayer(Player player, float degrees, float rudderSpeed) {
 	lazyLoadSpritesheetAtPath(playerImageTable, "images/player");
 
 	static float frame = 0;
-	frame += rudderSpeed / 10.0;
+	frame += rudderSpeed / 10.0f;
 	if (floorf(frame) > 3) {
 		frame = 0;
 	}
