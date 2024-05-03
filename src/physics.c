@@ -4,7 +4,6 @@
 
 #include "physics.h"
 
-#include <stdio.h>
 #include "rensutils.h"
 
 static PlaydateAPI *pd = NULL;
@@ -25,7 +24,13 @@ float calculateDisplacedWater(Player *player) {
 	// Volume = ((pi * h^2)/3) * (3 * r - h)
 	float h = player->radius - fabsf(player->pos.y - WATER_LEVEL);
 	float spherialCapVolume = ((PI * h * h) / 3.0f) * (3.0f * player->radius - h);
-	float submergedPlayerVolume = playerVolume - spherialCapVolume;
+
+	float submergedPlayerVolume;
+	if (player->pos.y > WATER_LEVEL) {
+		submergedPlayerVolume = playerVolume - spherialCapVolume;
+	} else {
+		submergedPlayerVolume = spherialCapVolume;
+	}
 
 	return submergedPlayerVolume;
 }
@@ -37,7 +42,8 @@ void processPlayerPhysics(Player *player, float delta) {
 	player->vel.y += GRAVITY * delta;
 
 	// Buoyancy
-	player->vel.y -= (7.0f * calculateDisplacedWater(player) * GRAVITY) / PLAYER_MASS * delta;
+	float buoyancyForce = (7.0f * calculateDisplacedWater(player) * GRAVITY);
+	player->vel.y -= buoyancyForce / PLAYER_MASS * delta;
 
 	// Apply velocity
 	player->pos.x += player->vel.x;
