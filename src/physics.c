@@ -17,7 +17,7 @@ float calculateDisplacedWater(Player *player) {
 	float playerVolume = 1.33333333333f * PI * player->radius * player->radius * player->radius;
 
 	// If fully submerged
-	if (player->pos.y - player->radius * 2 > WATER_LEVEL) {
+	if (player->pos.y - player->radius > WATER_LEVEL) {
 		return playerVolume;
 	}
 
@@ -44,6 +44,16 @@ void processPlayerPhysics(Player *player, float delta) {
 	// Buoyancy
 	float buoyancyForce = (7.0f * calculateDisplacedWater(player) * GRAVITY);
 	player->vel.y -= buoyancyForce / PLAYER_MASS * delta;
+
+	if (player->pos.y > WATER_LEVEL) {
+		// Water resistance
+		player->vel.x *= 0.997f;
+		player->vel.y *= 0.997f;
+	} else {
+		// Air resistance
+		player->vel.x *= 0.9995f;
+		player->vel.y *= 0.9995f;
+	}
 
 	// Apply velocity
 	player->pos.x += player->vel.x;
