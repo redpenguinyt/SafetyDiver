@@ -7,7 +7,6 @@
 
 #define GRAVITY 9.8f
 #define WATER_LEVEL 100
-
 #define PLAYER_MASS 50000
 
 typedef struct {
