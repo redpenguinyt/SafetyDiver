@@ -52,6 +52,13 @@ void drawPlayer(Player player, float degrees, float rudderSpeed) {
 }
 
 void drawHUD(Player player) {
+	static bool drawOnRight = false;
+	if (player.pos.x < 60) {
+		drawOnRight = true;
+	} else if (player.pos.x > 340) {
+		drawOnRight = false;
+	}
+
 	static LCDBitmap *depthImage = NULL;
 	if (depthImage == NULL) {
 		depthImage = gfx->newBitmap(30, 234, 1);
@@ -65,6 +72,7 @@ void drawHUD(Player player) {
 		gfx->popContext();
 	}
 
-	gfx->drawBitmap(depthImage, 3, 3, kBitmapUnflipped);
-	gfx->fillRect(3, player.pos.y / 10.0f + 82, 30, 3, 0);
+	int offsetXHUD = drawOnRight ? 360 : 3;
+	gfx->drawBitmap(depthImage, offsetXHUD, 3, kBitmapUnflipped);
+	gfx->fillRect(offsetXHUD, player.pos.y / 10.0f + 82, 30, 3, 0);
 }
