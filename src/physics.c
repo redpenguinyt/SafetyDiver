@@ -17,7 +17,7 @@ float calculateDisplacedWater(Player *player) {
 	float playerVolume = 1.33333333333f * PI * player->radius * player->radius * player->radius;
 
 	// If fully submerged
-	if (player->pos.y - player->radius > WATER_LEVEL) {
+	if (player->pos.y - player->radius * 2 > WATER_LEVEL) {
 		return playerVolume;
 	}
 
