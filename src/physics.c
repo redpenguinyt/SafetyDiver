@@ -58,8 +58,4 @@ void processPlayerPhysics(Player *player, float delta) {
 		player->pos.x = LCD_COLUMNS;
 		player->vel.x = -player->vel.x / 6.0f;
 	}
-	if (player->pos.y > LCD_ROWS) {
-		player->pos.y = LCD_ROWS;
-		player->vel.y = -player->vel.y / 10.0f;
-	}
 }

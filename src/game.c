@@ -45,7 +45,7 @@ int update(void *ud) {
 	}
 	processPlayerPhysics(&player, deltaTime);
 
-	drawWater();
+	drawWater(player);
 	drawPlayer(player, crankAngle, rudderStrength);
 
 	return 1;
