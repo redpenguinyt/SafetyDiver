@@ -20,7 +20,21 @@ void setupDraw(PlaydateAPI *p) {
 }
 
 void drawWater(float offsetY) {
-	gfx->fillRect(0, LCD_ROWS - offsetY, LCD_COLUMNS, offsetY, (LCDColor)grey20);
+	static LCDBitmap *waterImage = NULL;
+	if (waterImage == NULL) {
+		waterImage = gfx->newBitmap(400, 248, kColorClear);
+
+		gfx->pushContext(waterImage);
+		gfx->fillRect(0, 0, 400, 248, grey20);
+		gfx->popContext();
+	}
+
+	int imageY = LCD_ROWS - roundf(offsetY);
+	if (imageY < 0) {
+		imageY = (LCD_ROWS - (int)roundf(offsetY)) % 8;
+	}
+
+	gfx->drawBitmap(waterImage, 0, imageY, kBitmapUnflipped);
 	gfx->drawLine(0, LCD_ROWS - offsetY, LCD_COLUMNS, LCD_ROWS - offsetY, 1, 0);
 }
 
@@ -34,5 +48,5 @@ void drawPlayer(Player player, float degrees, float rudderSpeed) {
 	}
 
 	LCDBitmap *playerFrame = gfx->getTableBitmap(playerImageTable, (int)floorf(frame));
-	gfx->drawRotatedBitmap(playerFrame, player.pos.x, LCD_ROWS / 2, degrees, 0.5, 0.4, 1.5, 1.5);
+	gfx->drawRotatedBitmap(playerFrame, player.pos.x, LCD_ROWS / 2, degrees, 0.5, 0.4, 2, 2);
 }
