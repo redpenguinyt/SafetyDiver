@@ -25,7 +25,7 @@ void drawWater(float offsetY) {
 		waterImage = gfx->newBitmap(400, 248, kColorClear);
 
 		gfx->pushContext(waterImage);
-		gfx->fillRect(0, 0, 400, 248, grey20);
+		gfx->fillRect(0, 0, 400, 248, (LCDColor)grey20);
 		gfx->popContext();
 	}
 
@@ -49,4 +49,22 @@ void drawPlayer(Player player, float degrees, float rudderSpeed) {
 
 	LCDBitmap *playerFrame = gfx->getTableBitmap(playerImageTable, (int)floorf(frame));
 	gfx->drawRotatedBitmap(playerFrame, player.pos.x, LCD_ROWS / 2 - player.vel.y * 5.0f, degrees, 0.5, 0.4, 2, 2);
+}
+
+void drawHUD(Player player) {
+	static LCDBitmap *depthImage = NULL;
+	if (depthImage == NULL) {
+		depthImage = gfx->newBitmap(30, 234, 1);
+
+		gfx->pushContext(depthImage);
+
+		gfx->fillRect(0, WATER_LEVEL / 10.0f + 80, 30, LCD_ROWS - WATER_LEVEL + 6.0f, (LCDColor)grey20);
+		gfx->drawRect(0, WATER_LEVEL / 10.0f + 80, 30, 1, 0);
+		gfx->drawRect(0, 0, 30, 234, 0);
+
+		gfx->popContext();
+	}
+
+	gfx->drawBitmap(depthImage, 3, 3, kBitmapUnflipped);
+	gfx->fillRect(3, player.pos.y / 10.0f + 82, 30, 3, 0);
 }

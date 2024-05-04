@@ -48,5 +48,7 @@ int update(void *ud) {
 	drawWater(player.pos.y + player.vel.y * 5.0f + 20.0f);
 	drawPlayer(player, crankAngle, rudderStrength);
 
+	drawHUD(player);
+
 	return 1;
 }
