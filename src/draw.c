@@ -72,7 +72,7 @@ void drawHUD(Player player) {
 		gfx->popContext();
 	}
 
-	int offsetXHUD = drawOnRight ? 360 : 3;
+	int offsetXHUD = drawOnRight ? 367 : 3;
 	gfx->drawBitmap(depthImage, offsetXHUD, 3, kBitmapUnflipped);
 	gfx->fillRect(offsetXHUD, player.pos.y / 10.0f + 82, 30, 3, 0);
 }
