@@ -7,6 +7,7 @@
 #include "draw.h"
 #include "physics.h"
 #include "utils/rensutils.h"
+#include "utils/fonts.h"
 #include "treasure.h"
 
 static PlaydateAPI *pd = NULL;
@@ -21,6 +22,7 @@ void setup(PlaydateAPI *p) {
 	pd = p;
 	pd->display->setRefreshRate(50);
 
+	loadFonts(p);
 	setupDraw(p);
 	generateGold();
 
@@ -54,7 +56,7 @@ int update(void *ud) {
 	drawGold(pd, offsetY);
 	drawPlayer(player, crankAngle, rudderStrength);
 
-	drawHUD(player);
+	drawHUD(player, score);
 
 	return 1;
 }

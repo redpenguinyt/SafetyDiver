@@ -3,6 +3,8 @@
 //
 
 #include "draw.h"
+
+#include "utils/fonts.h"	 // for Pedallica font
 #include "utils/rensutils.h" // for lazyLoadSpritesheetAtPath
 
 const LCDPattern grey20 = {
@@ -51,7 +53,7 @@ void drawPlayer(Player player, float degrees, float rudderSpeed) {
 	gfx->drawRotatedBitmap(playerFrame, player.pos.x, LCD_ROWS / 2 - player.vel.y * 5.0f, degrees, 0.5, 0.4, 2, 2);
 }
 
-void drawHUD(Player player) {
+void drawHUD(Player player, int score) {
 	static bool drawOnRight = false;
 	if (player.pos.x < 60) {
 		drawOnRight = true;
@@ -75,4 +77,17 @@ void drawHUD(Player player) {
 	int offsetXHUD = drawOnRight ? 367 : 3;
 	gfx->drawBitmap(depthImage, offsetXHUD, 3, kBitmapUnflipped);
 	gfx->fillRect(offsetXHUD, player.pos.y / 10.0f + 82, 30, 3, 0);
+
+	// Score
+	char *scoreText;
+	pd->system->formatString(&scoreText, "Score: %d", score);
+
+	int textWidth = gfx->getTextWidth(getPedallicaFont(), scoreText, strlen(scoreText), kASCIIEncoding, 0);
+
+	int coords[] = {160, 0, 240, 0, 230, 20, 170, 20};
+	gfx->fillPolygon(4, coords, 1, kPolygonFillEvenOdd);
+	gfx->drawLine(240, 0, 230, 20, 2, 0);
+	gfx->drawLine(230, 20, 170, 20,2,0);
+	gfx->drawLine(170, 20, 160, 0, 2, 0);
+	gfx->drawText(scoreText, strlen(scoreText), kASCIIEncoding, (LCD_COLUMNS - textWidth) / 2, 3);
 }
