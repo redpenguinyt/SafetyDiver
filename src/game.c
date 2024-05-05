@@ -6,7 +6,7 @@
 
 #include "draw.h"
 #include "physics.h"
-#include "rensutils.h"
+#include "utils/rensutils.h"
 #include "treasure.h"
 
 static PlaydateAPI *pd = NULL;

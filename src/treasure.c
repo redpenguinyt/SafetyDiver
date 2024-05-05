@@ -4,7 +4,7 @@
 
 #include "treasure.h"
 
-#include "rensutils.h"
+#include "utils/rensutils.h"
 
 static GoldPiece gold[64];
 

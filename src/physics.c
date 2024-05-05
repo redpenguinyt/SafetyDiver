@@ -4,7 +4,7 @@
 
 #include "physics.h"
 
-#include "rensutils.h"
+#include "utils/rensutils.h"
 
 static PlaydateAPI *pd = NULL;
 

@@ -3,7 +3,7 @@
 //
 
 #include "draw.h"
-#include "rensutils.h"
+#include "utils/rensutils.h" // for lazyLoadSpritesheetAtPath
 
 const LCDPattern grey20 = {
 	0b01111111, 0b10111111, 0b11011111, 0b11101111, 0b11110111, 0b11111011, 0b11111101,
