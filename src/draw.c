@@ -87,7 +87,7 @@ void drawHUD(Player player, int score) {
 	int coords[] = {160, 0, 240, 0, 230, 20, 170, 20};
 	gfx->fillPolygon(4, coords, 1, kPolygonFillEvenOdd);
 	gfx->drawLine(240, 0, 230, 20, 2, 0);
-	gfx->drawLine(230, 20, 170, 20,2,0);
+	gfx->drawLine(230, 20, 170, 20, 2, 0);
 	gfx->drawLine(170, 20, 160, 0, 2, 0);
 	gfx->drawText(scoreText, strlen(scoreText), kASCIIEncoding, (LCD_COLUMNS - textWidth) / 2, 3);
 }

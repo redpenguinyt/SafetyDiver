@@ -41,8 +41,10 @@ void drawGold(PlaydateAPI *pd, int offsetY) {
 	for (size_t i = 0; i < (sizeof(gold) / sizeof(GoldPiece)); i++) {
 		gold[i].t += 0.05f;
 
-		float xRadius = ceilf(gold[i].radius * (cosf(gold[i].t)/2.0f + 0.5f));
+		// Coin spin effect
+		float xRadius = ceilf(gold[i].radius * (cosf(gold[i].t) / 2.0f + 0.5f));
 
-		pd->graphics->drawEllipse(gold[i].pos.x - xRadius, gold[i].pos.y - gold[i].radius - offsetY + 140, xRadius * 2, gold[i].radius * 2, 3, 0, 0, (LCDColor)0);
+		pd->graphics->drawEllipse(gold[i].pos.x - xRadius, gold[i].pos.y - gold[i].radius - offsetY + 140, xRadius * 2,
+								  gold[i].radius * 2, 3, 0, 0, (LCDColor)0);
 	}
 }

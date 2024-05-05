@@ -6,9 +6,9 @@
 
 #include "draw.h"
 #include "physics.h"
-#include "utils/rensutils.h"
-#include "utils/fonts.h"
 #include "treasure.h"
+#include "utils/fonts.h"
+#include "utils/rensutils.h"
 
 static PlaydateAPI *pd = NULL;
 static float deltaTime;
