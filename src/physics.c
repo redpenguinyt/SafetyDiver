@@ -68,4 +68,8 @@ void processPlayerPhysics(Player *player, float delta) {
 		player->pos.x = LCD_COLUMNS;
 		player->vel.x = -player->vel.x / 6.0f;
 	}
+	if (player->pos.y > FLOOR_LEVEL) {
+		player->pos.y = FLOOR_LEVEL;
+		player->vel.y = -fabsf(player->vel.y / 6.0f);
+	}
 }

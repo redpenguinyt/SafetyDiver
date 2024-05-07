@@ -7,7 +7,8 @@
 
 #define GRAVITY 9.8f
 #define WATER_LEVEL 100
-#define WATER_DENSITY 7.0f
+#define FLOOR_LEVEL 1520
+#define WATER_DENSITY 4.5f
 #define PLAYER_MASS 50000
 
 typedef struct {

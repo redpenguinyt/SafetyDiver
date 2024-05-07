@@ -10,7 +10,7 @@ static Hazard hazards[24];
 
 void randomiseHazard(Hazard *hazard) {
 	hazard->pos.x = rand() % 400;
-	hazard->pos.y = WATER_LEVEL + rand() % 2000;
+	hazard->pos.y = WATER_LEVEL + rand() % (FLOOR_LEVEL - WATER_LEVEL);
 	hazard->width = rand() % 100 + 20;
 	hazard->height = rand() % 60 + 10;
 }

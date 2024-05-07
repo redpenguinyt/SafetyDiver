@@ -10,7 +10,7 @@ static GoldPiece gold[64];
 
 void randomiseGold(GoldPiece *goldPiece) {
 	goldPiece->pos.x = rand() % 400;
-	goldPiece->pos.y = rand() % 2000 + WATER_LEVEL;
+	goldPiece->pos.y = WATER_LEVEL + rand() % (FLOOR_LEVEL - WATER_LEVEL);
 	goldPiece->radius = rand() % 10 + 5;
 	goldPiece->t = rand() % 6;
 }

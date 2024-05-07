@@ -38,6 +38,7 @@ void drawWater(float offsetY) {
 
 	gfx->drawBitmap(waterImage, 0, imageY, kBitmapUnflipped);
 	gfx->drawLine(0, WATER_LEVEL - offsetY, LCD_COLUMNS, WATER_LEVEL - offsetY, 1, 0);
+	gfx->drawLine(0, FLOOR_LEVEL - offsetY, LCD_COLUMNS, FLOOR_LEVEL - offsetY, 1, 0);
 }
 
 void drawPlayer(Player player, float degrees, float rudderSpeed) {
