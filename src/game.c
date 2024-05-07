@@ -8,6 +8,7 @@
 #include "hazards.h"
 #include "physics.h"
 #include "treasure.h"
+#include "utils/audio.h"
 #include "utils/fonts.h"
 #include "utils/rensutils.h"
 
@@ -23,6 +24,7 @@ void setup(PlaydateAPI *p) {
 	pd = p;
 	pd->display->setRefreshRate(50);
 
+	loadSounds(p);
 	loadFonts(p);
 	setupDraw(p);
 	generateGold();
@@ -54,6 +56,20 @@ int update(void *ud) {
 	processGold(player, &score);
 	if (processHazards(player)) {
 		score = 0;
+	}
+	if (player.pos.y > WATER_LEVEL && player.pos.y - player.vel.y < WATER_LEVEL && player.vel.y > 5.0f) {
+		pd->system->logToConsole("player ypos before: %f, player ypos after: %f", player.pos.y - player.vel.y, player.pos.y);
+		static AudioSample *splashSound;
+		static SamplePlayer *splashSoundPlayer;
+
+		if (splashSound == NULL || splashSoundPlayer == NULL) {
+			splashSound = pd->sound->sample->load("sounds/splash.wav");
+
+			splashSoundPlayer = pd->sound->sampleplayer->newPlayer();
+			pd->sound->sampleplayer->setSample(splashSoundPlayer, splashSound);
+		}
+
+		pd->sound->sampleplayer->play(splashSoundPlayer, 1, 1.0);
 	}
 
 	int offsetY = player.pos.y + player.vel.y * 5.0f - 120.0f;
