@@ -11,7 +11,7 @@
 void loadSounds(PlaydateAPI *p);
 
 PDSynth *createSynth(SoundWaveform waveform, float attack, float decay, float sustain, float release);
-void playClickSound(void);
+// void playClickSound(void);
 void playSample(SamplePlayer *player, AudioSample *sample);
 
 #endif /* audio_h */
