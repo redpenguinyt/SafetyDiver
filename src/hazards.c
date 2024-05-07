@@ -16,7 +16,8 @@ void randomiseHazard(Hazard *hazard) {
 }
 
 bool isPosInHazard(Vec2F pos, Hazard hazard) {
-	return pos.x >= hazard.pos.x && pos.x < (hazard.pos.x + hazard.width) && pos.y >= hazard.pos.y && pos.y < (hazard.pos.y + hazard.height);
+	return pos.x >= hazard.pos.x && pos.x < (hazard.pos.x + hazard.width) && pos.y >= hazard.pos.y &&
+		   pos.y < (hazard.pos.y + hazard.height);
 }
 
 // Public
