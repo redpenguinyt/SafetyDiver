@@ -42,7 +42,7 @@ void processPlayerPhysics(Player *player, float delta) {
 	player->vel.y += GRAVITY * delta;
 
 	// Buoyancy
-	float buoyancyForce = (7.0f * calculateDisplacedWater(player) * GRAVITY);
+	float buoyancyForce = (WATER_DENSITY * calculateDisplacedWater(player) * GRAVITY);
 	player->vel.y -= buoyancyForce / PLAYER_MASS * delta;
 
 	if (player->pos.y > WATER_LEVEL) {
