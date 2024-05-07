@@ -41,7 +41,7 @@ void drawWater(float offsetY) {
 	gfx->drawLine(0, FLOOR_LEVEL - offsetY, LCD_COLUMNS, FLOOR_LEVEL - offsetY, 1, 0);
 }
 
-void drawPlayer(Player player, float degrees, float rudderSpeed) {
+void drawPlayer(Player player, float degrees, float rudderSpeed, int heldScore) {
 	lazyLoadSpritesheetAtPath(playerImageTable, "images/player");
 
 	static float frame = 0;
@@ -54,6 +54,14 @@ void drawPlayer(Player player, float degrees, float rudderSpeed) {
 
 	LCDBitmap *playerFrame = gfx->getTableBitmap(playerImageTable, (int)floorf(frame));
 	gfx->drawRotatedBitmap(playerFrame, player.pos.x, offsetY, degrees, 0.5, 0.4, 2, 2);
+
+	// Held Score
+	if (heldScore > 0) {
+		char *heldScoreText;
+		pd->system->formatString(&heldScoreText, "%d", heldScore);
+
+		gfx->drawText(heldScoreText, strlen(heldScoreText), kASCIIEncoding, player.pos.x + 15, offsetY - 15);
+	}
 }
 
 void drawHUD(Player player, int score) {

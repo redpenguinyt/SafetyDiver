@@ -17,6 +17,7 @@ static float deltaTime;
 
 static Player player;
 static int score = 0;
+static int heldScore = 0;
 
 // Main functions
 
@@ -53,9 +54,13 @@ int update(void *ud) {
 		player.vel.y += sinf(deg2rad(crankAngle - 90)) * rudderStrength * deltaTime;
 	}
 	processPlayerPhysics(&player, deltaTime);
-	processGold(player, &score);
+	processGold(player, &heldScore);
 	if (processHazards(player)) {
-		score = 0;
+		heldScore = 0;
+	}
+	if (player.pos.y < WATER_LEVEL) {
+		score += heldScore;
+		heldScore = 0;
 	}
 	if (player.pos.y > WATER_LEVEL && player.pos.y - player.vel.y < WATER_LEVEL && player.vel.y > 5.0f) {
 		static AudioSample *splashSound;
@@ -75,7 +80,7 @@ int update(void *ud) {
 	drawWater(offsetY);
 	drawGold(pd, offsetY);
 	drawHazards(pd, offsetY);
-	drawPlayer(player, crankAngle, rudderStrength);
+	drawPlayer(player, crankAngle, rudderStrength, heldScore);
 
 	drawHUD(player, score);
 

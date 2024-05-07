@@ -13,7 +13,7 @@
 void setupDraw(PlaydateAPI *p);
 
 void drawWater(float offsetY);
-void drawPlayer(Player player, float degrees, float rudderStrength);
+void drawPlayer(Player player, float degrees, float rudderStrength, int heldScore);
 void drawHUD(Player player, int score);
 
 #endif /* draw_h */
