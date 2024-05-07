@@ -49,8 +49,10 @@ void drawPlayer(Player player, float degrees, float rudderSpeed) {
 		frame = 0;
 	}
 
+	float offsetY = LCD_ROWS / 2 - player.vel.y * 5.0f;
+
 	LCDBitmap *playerFrame = gfx->getTableBitmap(playerImageTable, (int)floorf(frame));
-	gfx->drawRotatedBitmap(playerFrame, player.pos.x, LCD_ROWS / 2 - player.vel.y * 5.0f, degrees, 0.5, 0.4, 2, 2);
+	gfx->drawRotatedBitmap(playerFrame, player.pos.x, offsetY, degrees, 0.5, 0.4, 2, 2);
 }
 
 void drawHUD(Player player, int score) {
