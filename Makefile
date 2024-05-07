@@ -1,7 +1,7 @@
 HEAP_SIZE      = 8388208
 STACK_SIZE     = 61800
 
-PRODUCT = Buoyancy.pdx
+PRODUCT = SafetyDiver.pdx
 
 # Locate the SDK
 SDK = ${PLAYDATE_SDK_PATH}
