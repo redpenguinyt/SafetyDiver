@@ -1,5 +1,7 @@
-name=Playdate Template
-author=Red Penguin
-description=A game template for the Playdate handheld console
-bundleID=com.example.playdate_template
+name=Safety Diver
+author=ren
+description=A game about collecting treasure while fighting your natural buoyancy
+bundleID=in.redpengu.safetydiver
+version=0.1
+buildNumber=1
 imagePath=
