@@ -58,7 +58,6 @@ int update(void *ud) {
 		score = 0;
 	}
 	if (player.pos.y > WATER_LEVEL && player.pos.y - player.vel.y < WATER_LEVEL && player.vel.y > 5.0f) {
-		pd->system->logToConsole("player ypos before: %f, player ypos after: %f", player.pos.y - player.vel.y, player.pos.y);
 		static AudioSample *splashSound;
 		static SamplePlayer *splashSoundPlayer;
 
