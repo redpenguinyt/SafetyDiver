@@ -31,13 +31,13 @@ void drawWater(float offsetY) {
 		gfx->popContext();
 	}
 
-	int imageY = LCD_ROWS - roundf(offsetY);
+	int imageY = WATER_LEVEL - roundf(offsetY);
 	if (imageY < 0) {
-		imageY = (LCD_ROWS - (int)roundf(offsetY)) % 8;
+		imageY = (WATER_LEVEL - (int)roundf(offsetY)) % 8;
 	}
 
 	gfx->drawBitmap(waterImage, 0, imageY, kBitmapUnflipped);
-	gfx->drawLine(0, LCD_ROWS - offsetY, LCD_COLUMNS, LCD_ROWS - offsetY, 1, 0);
+	gfx->drawLine(0, WATER_LEVEL - offsetY, LCD_COLUMNS, WATER_LEVEL - offsetY, 1, 0);
 }
 
 void drawPlayer(Player player, float degrees, float rudderSpeed) {

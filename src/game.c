@@ -5,6 +5,7 @@
 #include "game.h"
 
 #include "draw.h"
+#include "hazards.h"
 #include "physics.h"
 #include "treasure.h"
 #include "utils/fonts.h"
@@ -25,6 +26,7 @@ void setup(PlaydateAPI *p) {
 	loadFonts(p);
 	setupDraw(p);
 	generateGold();
+	generateHazards();
 
 	player.pos.x = LCD_COLUMNS / 2;
 	player.pos.y = 60;
@@ -50,10 +52,14 @@ int update(void *ud) {
 	}
 	processPlayerPhysics(&player, deltaTime);
 	processGold(player, &score);
+	if (processHazards(player)) {
+		score = 0;
+	}
 
-	int offsetY = player.pos.y + player.vel.y * 5.0f + 20.0f;
+	int offsetY = player.pos.y + player.vel.y * 5.0f - 120.0f;
 	drawWater(offsetY);
 	drawGold(pd, offsetY);
+	drawHazards(pd, offsetY);
 	drawPlayer(player, crankAngle, rudderStrength);
 
 	drawHUD(player, score);
