@@ -28,7 +28,7 @@ void setup(PlaydateAPI *p) {
 	loadSounds(p);
 	loadFonts(p);
 	setupDraw(p);
-	generateGold();
+	setupTreasure(p);
 	generateHazards();
 
 	player.pos.x = LCD_COLUMNS / 2;

@@ -6,6 +6,11 @@
 
 #include "utils/rensutils.h"
 
+static PlaydateAPI *pd = NULL;
+
+static AudioSample *coinSound;
+static SamplePlayer *coinSoundPlayer;
+
 static GoldPiece gold[64];
 
 void randomiseGold(GoldPiece *goldPiece) {
@@ -17,7 +22,13 @@ void randomiseGold(GoldPiece *goldPiece) {
 
 // Public
 
-void generateGold(void) {
+void setupTreasure(PlaydateAPI *p) {
+	pd = p;
+
+	coinSound = pd->sound->sample->load("sounds/coin.wav");
+	coinSoundPlayer = pd->sound->sampleplayer->newPlayer();
+	pd->sound->sampleplayer->setSample(coinSoundPlayer, coinSound);
+
 	for (size_t i = 0; i < (sizeof(gold) / sizeof(GoldPiece)); i++) {
 		randomiseGold(&gold[i]);
 	}
@@ -33,6 +44,7 @@ void processGold(Player player, int *score) {
 		if (distance < player.radius + gold[i].radius) {
 			*score += 1;
 			randomiseGold(&gold[i]);
+			pd->sound->sampleplayer->play(coinSoundPlayer, 1, 1.0f);
 		}
 	}
 }
