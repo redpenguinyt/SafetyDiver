@@ -8,9 +8,6 @@
 #include "physics.h"
 #include <stdbool.h>
 
-#define TARGET_EXTENSION 1
-#include "pd_api.h"
-
 typedef struct {
 	Vec2F pos;
 	float width, height;

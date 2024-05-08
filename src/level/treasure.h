@@ -7,9 +7,6 @@
 
 #include "physics.h"
 
-#define TARGET_EXTENSION 1
-#include "pd_api.h"
-
 typedef struct {
 	Vec2F pos;
 	float radius;

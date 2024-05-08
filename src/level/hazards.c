@@ -4,8 +4,8 @@
 
 #include "hazards.h"
 
-#include "utils/pd_pointer.h"
-#include "utils/rensutils.h"
+#include "../utils/pd_pointer.h"
+#include "../utils/rensutils.h"
 
 static Hazard hazards[24];
 

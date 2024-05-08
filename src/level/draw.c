@@ -4,9 +4,9 @@
 
 #include "draw.h"
 
-#include "utils/fonts.h"	 // for Pedallica font
-#include "utils/rensutils.h" // for lazyLoadSpritesheetAtPath
-#include "utils/pd_pointer.h"
+#include "../utils/fonts.h"	 // for Pedallica font
+#include "../utils/rensutils.h" // for lazyLoadSpritesheetAtPath
+#include "../utils/pd_pointer.h"
 
 const LCDPattern grey20 = {
 	0b01111111, 0b10111111, 0b11011111, 0b11101111, 0b11110111, 0b11111011, 0b11111101,
@@ -34,11 +34,11 @@ void drawWater(float offsetY) {
 	gfx->drawLine(0, FLOOR_LEVEL - offsetY, LCD_COLUMNS, FLOOR_LEVEL - offsetY, 1, 0);
 }
 
-void drawPlayer(Player player, float degrees, float rudderSpeed, int heldScore) {
+void drawPlayer(Player player, float degrees, int heldScore) {
 	lazyLoadSpritesheetAtPath(playerImageTable, "images/player");
 
 	static float frame = 0;
-	frame += rudderSpeed / 10.0f;
+	frame += player.rudderStrength / 10.0f;
 	if (floorf(frame) > 3) {
 		frame = 0;
 	}

@@ -4,8 +4,8 @@
 
 #include "treasure.h"
 
-#include "utils/rensutils.h"
-#include "utils/pd_pointer.h"
+#include "../utils/rensutils.h"
+#include "../utils/pd_pointer.h"
 
 static AudioSample *coinSound;
 static SamplePlayer *coinSoundPlayer;

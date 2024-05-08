@@ -4,11 +4,11 @@
 
 #include "game.h"
 
-#include "draw.h"
-#include "hazards.h"
-#include "physics.h"
-#include "player.h"
-#include "treasure.h"
+#include "level/draw.h"
+#include "level/hazards.h"
+#include "level/physics.h"
+#include "level/player.h"
+#include "level/treasure.h"
 #include "utils/fonts.h"
 #include "utils/pd_pointer.h"
 #include "utils/rensutils.h"
@@ -18,6 +18,33 @@ static float deltaTime;
 static Player player;
 static int score = 0;
 static int heldScore = 0;
+
+void process(float deltaTime) {
+	playerMovement(&player, deltaTime);
+	processPlayerPhysics(&player, deltaTime);
+	processGold(player, &heldScore);
+	if (processHazardCollisions(&player)) {
+		heldScore = 0;
+	}
+	if (player.pos.y < WATER_LEVEL) {
+		score += heldScore;
+		heldScore = 0;
+	}
+	playerSounds(player);
+}
+
+void draw(void) {
+	int offsetY = player.pos.y + player.vel.y * 5.0f - 120.0f;
+	if (player.pos.y > FLOOR_LEVEL - LCD_ROWS / 2) {
+		offsetY = FLOOR_LEVEL - LCD_ROWS - 2;
+	}
+	drawWater(offsetY);
+	drawGold(offsetY);
+	drawHazards(offsetY);
+	drawPlayer(player, sys->getCrankAngle(), heldScore);
+
+	drawHUD(player, score);
+}
 
 // Main functions
 
@@ -37,28 +64,9 @@ int update(void *ud) {
 	sys->resetElapsedTime();
 	gfx->clear(1);
 
-	float rudderStrength = playerMovement(&player, deltaTime);
-	processPlayerPhysics(&player, deltaTime);
-	processGold(player, &heldScore);
-	if (processHazardCollisions(&player)) {
-		heldScore = 0;
-	}
-	if (player.pos.y < WATER_LEVEL) {
-		score += heldScore;
-		heldScore = 0;
-	}
-	playerSounds(player);
+	process(deltaTime);
 
-	int offsetY = player.pos.y + player.vel.y * 5.0f - 120.0f;
-	if (player.pos.y > FLOOR_LEVEL - LCD_ROWS / 2) {
-		offsetY = FLOOR_LEVEL - LCD_ROWS - 2;
-	}
-	drawWater(offsetY);
-	drawGold(offsetY);
-	drawHazards(offsetY);
-	drawPlayer(player, sys->getCrankAngle(), rudderStrength, heldScore);
-
-	drawHUD(player, score);
+	draw();
 
 	return 1;
 }

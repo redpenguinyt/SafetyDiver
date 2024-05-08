@@ -18,6 +18,7 @@ typedef struct {
 typedef struct {
 	Vec2F pos, vel;
 	float radius;
+	float rudderStrength;
 } Player;
 
 void processPlayerPhysics(Player *player, float delta);

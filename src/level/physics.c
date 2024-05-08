@@ -4,7 +4,7 @@
 
 #include "physics.h"
 
-#include "utils/rensutils.h"
+#include "../utils/rensutils.h"
 
 float calculateDisplacedWater(Player *player) {
 	// Exit if above water level

@@ -4,8 +4,8 @@
 
 #include "player.h"
 
-#include "utils/rensutils.h"
-#include "utils/pd_pointer.h"
+#include "../utils/pd_pointer.h"
+#include "../utils/rensutils.h"
 
 Player newPlayer(void) {
 	Player player;
@@ -19,22 +19,21 @@ Player newPlayer(void) {
 	return player;
 }
 
-float playerMovement(Player *player, float deltaTime) {
-	float rudderStrength = 0;
-	float crankAngle = sys->getCrankAngle();
+void playerMovement(Player *player, float deltaTime) {
+	player->rudderStrength = 0;
+	float crankAngle = deg2rad(sys->getCrankAngle() - 90);
 
 	PDButtons pressed;
 	sys->getButtonState(&pressed, NULL, NULL);
 	if (pressed & kButtonB) {
-		rudderStrength = 5.0f;
+		player->rudderStrength = 5.0f;
 		if (player->pos.y < WATER_LEVEL) {
-			rudderStrength = 2.0f;
+			player->rudderStrength = 2.0f;
 		}
-		player->vel.x += cosf(deg2rad(crankAngle - 90)) * rudderStrength * deltaTime;
-		player->vel.y += sinf(deg2rad(crankAngle - 90)) * rudderStrength * deltaTime;
-	}
 
-	return rudderStrength;
+		player->vel.x += cosf(crankAngle) * player->rudderStrength * deltaTime;
+		player->vel.y += sinf(crankAngle) * player->rudderStrength * deltaTime;
+	}
 }
 
 void playerSounds(Player player) {
