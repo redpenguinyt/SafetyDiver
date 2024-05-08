@@ -7,6 +7,7 @@
 #include "draw.h"
 #include "hazards.h"
 #include "physics.h"
+#include "player.h"
 #include "treasure.h"
 #include "utils/audio.h"
 #include "utils/fonts.h"
@@ -30,10 +31,9 @@ void setup(PlaydateAPI *p) {
 	setupDraw(p);
 	setupTreasure(p);
 	generateHazards();
+	setupPlayer(p);
 
-	player.pos.x = LCD_COLUMNS / 2;
-	player.pos.y = 60;
-	player.radius = 15;
+	player = newPlayer();
 }
 
 int update(void *ud) {
@@ -41,18 +41,7 @@ int update(void *ud) {
 	pd->system->resetElapsedTime();
 	pd->graphics->clear(1);
 
-	float rudderStrength = 0.0;
-	float crankAngle = pd->system->getCrankAngle();
-	PDButtons pressed;
-	pd->system->getButtonState(&pressed, NULL, NULL);
-	if (pressed & kButtonB) {
-		rudderStrength = 5.0;
-		if (player.pos.y < WATER_LEVEL) {
-			rudderStrength = 2.0;
-		}
-		player.vel.x += cosf(deg2rad(crankAngle - 90)) * rudderStrength * deltaTime;
-		player.vel.y += sinf(deg2rad(crankAngle - 90)) * rudderStrength * deltaTime;
-	}
+	float rudderStrength = playerMovement(&player, deltaTime);
 	processPlayerPhysics(&player, deltaTime);
 	processGold(player, &heldScore);
 	if (processHazards(player)) {
@@ -62,25 +51,13 @@ int update(void *ud) {
 		score += heldScore;
 		heldScore = 0;
 	}
-	if (player.pos.y > WATER_LEVEL && player.pos.y - player.vel.y < WATER_LEVEL && player.vel.y > 5.0f) {
-		static AudioSample *splashSound;
-		static SamplePlayer *splashSoundPlayer;
-
-		if (splashSound == NULL || splashSoundPlayer == NULL) {
-			splashSound = pd->sound->sample->load("sounds/splash.wav");
-
-			splashSoundPlayer = pd->sound->sampleplayer->newPlayer();
-			pd->sound->sampleplayer->setSample(splashSoundPlayer, splashSound);
-		}
-
-		pd->sound->sampleplayer->play(splashSoundPlayer, 1, 1.0);
-	}
+	playerSounds(player);
 
 	int offsetY = player.pos.y + player.vel.y * 5.0f - 120.0f;
 	drawWater(offsetY);
 	drawGold(pd, offsetY);
 	drawHazards(pd, offsetY);
-	drawPlayer(player, crankAngle, rudderStrength, heldScore);
+	drawPlayer(player, pd->system->getCrankAngle(), rudderStrength, heldScore);
 
 	drawHUD(player, score);
 
