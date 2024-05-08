@@ -54,7 +54,7 @@ void drawPlayer(Player player, float degrees, float rudderSpeed, int heldScore) 
 	// Held Score
 	if (heldScore > 0) {
 		char *heldScoreText;
-		pd->system->formatString(&heldScoreText, "%d", heldScore);
+		sys->formatString(&heldScoreText, "%d", heldScore);
 
 		gfx->drawText(heldScoreText, strlen(heldScoreText), kASCIIEncoding, player.pos.x + 15, offsetY - 15);
 	}
@@ -87,7 +87,7 @@ void drawHUD(Player player, int score) {
 
 	// Score
 	char *scoreText;
-	pd->system->formatString(&scoreText, "Score: %d", score);
+	sys->formatString(&scoreText, "Score: %d", score);
 
 	int textWidth = gfx->getTextWidth(getPedallicaFont(), scoreText, strlen(scoreText), kASCIIEncoding, 0);
 

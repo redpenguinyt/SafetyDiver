@@ -94,6 +94,6 @@ bool processHazardCollisions(Player *player) {
 
 void drawHazards(int offsetY) {
 	for (size_t i = 0; i < (sizeof(hazards) / sizeof(Hazard)); i++) {
-		pd->graphics->drawRect(hazards[i].pos.x, hazards[i].pos.y - offsetY, hazards[i].width, hazards[i].height, 0);
+		gfx->drawRect(hazards[i].pos.x, hazards[i].pos.y - offsetY, hazards[i].width, hazards[i].height, 0);
 	}
 }

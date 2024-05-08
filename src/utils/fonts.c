@@ -10,9 +10,9 @@ LCDFont *pedallicaFont = NULL;
 
 // Loads the fonts and sets fullCircleFont as the default font
 void loadFonts(void) {
-	pedallicaFont = pd->graphics->loadFont("fonts/pedallica", NULL);
+	pedallicaFont = gfx->loadFont("fonts/pedallica", NULL);
 
-	pd->graphics->setFont(pedallicaFont);
+	gfx->setFont(pedallicaFont);
 }
 
 LCDFont *getPedallicaFont(void) { return pedallicaFont; }

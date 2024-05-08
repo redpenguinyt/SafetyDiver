@@ -33,9 +33,9 @@ void setup(PlaydateAPI *p) {
 }
 
 int update(void *ud) {
-	deltaTime = pd->system->getElapsedTime();
-	pd->system->resetElapsedTime();
-	pd->graphics->clear(1);
+	deltaTime = sys->getElapsedTime();
+	sys->resetElapsedTime();
+	gfx->clear(1);
 
 	float rudderStrength = playerMovement(&player, deltaTime);
 	processPlayerPhysics(&player, deltaTime);
@@ -56,7 +56,7 @@ int update(void *ud) {
 	drawWater(offsetY);
 	drawGold(offsetY);
 	drawHazards(offsetY);
-	drawPlayer(player, pd->system->getCrankAngle(), rudderStrength, heldScore);
+	drawPlayer(player, sys->getCrankAngle(), rudderStrength, heldScore);
 
 	drawHUD(player, score);
 

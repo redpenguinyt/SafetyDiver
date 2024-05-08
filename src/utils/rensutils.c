@@ -12,17 +12,17 @@ float deg2rad(float degrees) { return degrees * PI / 180.0f; }
 
 LCDBitmap *loadImageAtPath(const char *path) {
 	const char *outErr = NULL;
-	LCDBitmap *img = pd->graphics->loadBitmap(path, &outErr);
+	LCDBitmap *img = gfx->loadBitmap(path, &outErr);
 	if (outErr != NULL) {
-		pd->system->logToConsole("Error loading image at path '%s': %s", path, outErr);
+		sys->logToConsole("Error loading image at path '%s': %s", path, outErr);
 	}
 	return img;
 }
 LCDBitmapTable *loadSpritesheetAtPath(const char *path) {
 	const char *outErr = NULL;
-	LCDBitmapTable *img = pd->graphics->loadBitmapTable(path, &outErr);
+	LCDBitmapTable *img = gfx->loadBitmapTable(path, &outErr);
 	if (outErr != NULL) {
-		pd->system->logToConsole("Error loading spritesheet at path '%s': %s", path, outErr);
+		sys->logToConsole("Error loading spritesheet at path '%s': %s", path, outErr);
 	}
 	return img;
 }

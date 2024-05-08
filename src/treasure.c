@@ -41,7 +41,7 @@ void processGold(Player player, int *score) {
 		if (distance < player.radius + gold[i].radius) {
 			*score += 1;
 			randomiseGold(&gold[i]);
-			pd->sound->sampleplayer->play(coinSoundPlayer, 1, 1.0f);
+			snd->sampleplayer->play(coinSoundPlayer, 1, 1.0f);
 		}
 	}
 }
@@ -53,7 +53,7 @@ void drawGold(int offsetY) {
 		// Coin spin effect
 		float xRadius = ceilf(gold[i].radius * (cosf(gold[i].t) / 2.0f + 0.5f));
 
-		pd->graphics->drawEllipse(gold[i].pos.x - xRadius, gold[i].pos.y - gold[i].radius - offsetY, xRadius * 2,
+		gfx->drawEllipse(gold[i].pos.x - xRadius, gold[i].pos.y - gold[i].radius - offsetY, xRadius * 2,
 								  gold[i].radius * 2, 3, 0, 0, (LCDColor)0);
 	}
 }

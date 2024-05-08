@@ -21,10 +21,10 @@ Player newPlayer(void) {
 
 float playerMovement(Player *player, float deltaTime) {
 	float rudderStrength = 0;
-	float crankAngle = pd->system->getCrankAngle();
+	float crankAngle = sys->getCrankAngle();
 
 	PDButtons pressed;
-	pd->system->getButtonState(&pressed, NULL, NULL);
+	sys->getButtonState(&pressed, NULL, NULL);
 	if (pressed & kButtonB) {
 		rudderStrength = 5.0f;
 		if (player->pos.y < WATER_LEVEL) {
