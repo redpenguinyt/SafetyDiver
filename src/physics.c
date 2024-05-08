@@ -62,11 +62,11 @@ void processPlayerPhysics(Player *player, float delta) {
 	// Hitting walls
 	if (player->pos.x < 0) {
 		player->pos.x = 0;
-		player->vel.x = -player->vel.x / 6.0f;
+		player->vel.x /= -6.0f;
 	}
 	if (player->pos.x > LCD_COLUMNS) {
 		player->pos.x = LCD_COLUMNS;
-		player->vel.x = -player->vel.x / 6.0f;
+		player->vel.x /= -6.0f;
 	}
 	if (player->pos.y > FLOOR_LEVEL) {
 		player->pos.y = FLOOR_LEVEL;
