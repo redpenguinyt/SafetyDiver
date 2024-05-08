@@ -5,10 +5,7 @@
 #include "player.h"
 
 #include "utils/rensutils.h"
-
-static PlaydateAPI *pd = NULL;
-
-void setupPlayer(PlaydateAPI *p) { pd = p; }
+#include "utils/pd_pointer.h"
 
 Player newPlayer(void) {
 	Player player;
@@ -46,12 +43,12 @@ void playerSounds(Player player) {
 		static SamplePlayer *splashSoundPlayer;
 
 		if (splashSound == NULL || splashSoundPlayer == NULL) {
-			splashSound = pd->sound->sample->load("sounds/splash.wav");
+			splashSound = snd->sample->load("sounds/splash.wav");
 
-			splashSoundPlayer = pd->sound->sampleplayer->newPlayer();
-			pd->sound->sampleplayer->setSample(splashSoundPlayer, splashSound);
+			splashSoundPlayer = snd->sampleplayer->newPlayer();
+			snd->sampleplayer->setSample(splashSoundPlayer, splashSound);
 		}
 
-		pd->sound->sampleplayer->play(splashSoundPlayer, 1, 1.0);
+		snd->sampleplayer->play(splashSoundPlayer, 1, 1.0);
 	}
 }

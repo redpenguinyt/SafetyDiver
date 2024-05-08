@@ -12,8 +12,8 @@
 #include "utils/audio.h"
 #include "utils/fonts.h"
 #include "utils/rensutils.h"
+#include "utils/pd_pointer.h"
 
-static PlaydateAPI *pd = NULL;
 static float deltaTime;
 
 static Player player;
@@ -23,15 +23,12 @@ static int heldScore = 0;
 // Main functions
 
 void setup(PlaydateAPI *p) {
-	pd = p;
+	setupPointer(p);
 	pd->display->setRefreshRate(50);
 
-	loadSounds(p);
-	loadFonts(p);
-	setupDraw(p);
-	setupTreasure(p);
-	setupHazards(p);
-	setupPlayer(p);
+	loadFonts();
+	setupTreasure();
+	setupHazards();
 
 	player = newPlayer();
 }

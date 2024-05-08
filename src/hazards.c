@@ -5,8 +5,8 @@
 #include "hazards.h"
 
 #include "utils/rensutils.h"
+#include "utils/pd_pointer.h"
 
-static PlaydateAPI *pd = NULL;
 static Hazard hazards[24];
 
 void randomiseHazard(Hazard *hazard) {
@@ -18,9 +18,7 @@ void randomiseHazard(Hazard *hazard) {
 
 // Public
 
-void setupHazards(PlaydateAPI *p) {
-	pd = p;
-
+void setupHazards(void) {
 	for (size_t i = 0; i < (sizeof(hazards) / sizeof(Hazard)); i++) {
 		randomiseHazard(&hazards[i]);
 	}

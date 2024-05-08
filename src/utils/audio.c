@@ -4,23 +4,19 @@
 
 #include "audio.h"
 
-static PlaydateAPI *pd = NULL;
-static const struct playdate_sound *snd = NULL;
+#include "pd_pointer.h"
 
 // static AudioSample *clickSound = NULL;
 // static SamplePlayer *clickSoundPlayer = NULL;
 
 // Public functions
 
-void loadSounds(PlaydateAPI *p) {
-	pd = p;
-	snd = p->sound;
-
-	// clickSound = snd->sample->load("sounds/ui_click.wav");
-	// clickSoundPlayer = snd->sampleplayer->newPlayer();
-	// snd->sampleplayer->setSample(clickSoundPlayer, clickSound);
-	// snd->sampleplayer->setVolume(clickSoundPlayer, 0.5, 0.5);
-}
+// void loadSounds(void) {
+// 	clickSound = snd->sample->load("sounds/ui_click.wav");
+// 	clickSoundPlayer = snd->sampleplayer->newPlayer();
+// 	snd->sampleplayer->setSample(clickSoundPlayer, clickSound);
+// 	snd->sampleplayer->setVolume(clickSoundPlayer, 0.5, 0.5);
+// }
 
 PDSynth *createSynth(SoundWaveform waveform, float attack, float decay, float sustain, float release) {
 	PDSynth *synth = snd->synth->newSynth();

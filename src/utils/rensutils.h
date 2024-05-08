@@ -17,16 +17,16 @@
 float rad2deg(float radians);
 float deg2rad(float degrees);
 
-LCDBitmap *loadImageAtPath(PlaydateAPI *pd, const char *path);
+LCDBitmap *loadImageAtPath(const char *path);
 #define lazyLoadImageAtPath(VAR, FILE) \
 	static LCDBitmap *VAR = NULL;      \
 	if (VAR == NULL)                   \
-		VAR = loadImageAtPath(pd, FILE);
-LCDBitmapTable *loadSpritesheetAtPath(PlaydateAPI *pd, const char *path);
+		VAR = loadImageAtPath(FILE);
+LCDBitmapTable *loadSpritesheetAtPath(const char *path);
 #define lazyLoadSpritesheetAtPath(VAR, FILE) \
 	static LCDBitmapTable *VAR = NULL;       \
 	if (VAR == NULL)                         \
-		VAR = loadSpritesheetAtPath(pd, FILE);
+		VAR = loadSpritesheetAtPath(FILE);
 
 bool isPosOnScreen(int x, int y);
 

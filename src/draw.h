@@ -10,8 +10,6 @@
 #define TARGET_EXTENSION 1
 #include "pd_api.h"
 
-void setupDraw(PlaydateAPI *p);
-
 void drawWater(float offsetY);
 void drawPlayer(Player player, float degrees, float rudderStrength, int heldScore);
 void drawHUD(Player player, int score);

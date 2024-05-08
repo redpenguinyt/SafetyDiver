@@ -16,7 +16,7 @@ typedef struct {
 	float t;
 } GoldPiece;
 
-void setupTreasure(PlaydateAPI *p);
+void setupTreasure(void);
 void processGold(Player player, int *score);
 void drawGold(int offsetY);
 

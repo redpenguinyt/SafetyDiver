@@ -10,7 +10,6 @@
 #define TARGET_EXTENSION 1
 #include "pd_api.h"
 
-void setupPlayer(PlaydateAPI *p);
 Player newPlayer(void);
 /// Returns the rudder strength
 float playerMovement(Player *player, float deltaTime);

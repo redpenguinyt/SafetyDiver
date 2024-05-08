@@ -5,8 +5,7 @@
 #include "treasure.h"
 
 #include "utils/rensutils.h"
-
-static PlaydateAPI *pd = NULL;
+#include "utils/pd_pointer.h"
 
 static AudioSample *coinSound;
 static SamplePlayer *coinSoundPlayer;
@@ -22,12 +21,10 @@ void randomiseGold(GoldPiece *goldPiece) {
 
 // Public
 
-void setupTreasure(PlaydateAPI *p) {
-	pd = p;
-
-	coinSound = pd->sound->sample->load("sounds/coin.wav");
-	coinSoundPlayer = pd->sound->sampleplayer->newPlayer();
-	pd->sound->sampleplayer->setSample(coinSoundPlayer, coinSound);
+void setupTreasure(void) {
+	coinSound = snd->sample->load("sounds/coin.wav");
+	coinSoundPlayer = snd->sampleplayer->newPlayer();
+	snd->sampleplayer->setSample(coinSoundPlayer, coinSound);
 
 	for (size_t i = 0; i < (sizeof(gold) / sizeof(GoldPiece)); i++) {
 		randomiseGold(&gold[i]);

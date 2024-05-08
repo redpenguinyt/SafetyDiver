@@ -6,8 +6,6 @@
 
 #include "utils/rensutils.h"
 
-static PlaydateAPI *pd = NULL;
-
 float calculateDisplacedWater(Player *player) {
 	// Exit if above water level
 	if (player->pos.y + player->radius < WATER_LEVEL) {
