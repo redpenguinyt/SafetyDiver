@@ -9,10 +9,9 @@
 #include "physics.h"
 #include "player.h"
 #include "treasure.h"
-#include "utils/audio.h"
 #include "utils/fonts.h"
-#include "utils/rensutils.h"
 #include "utils/pd_pointer.h"
+#include "utils/rensutils.h"
 
 static float deltaTime;
 
