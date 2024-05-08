@@ -30,7 +30,7 @@ void setup(PlaydateAPI *p) {
 	loadFonts(p);
 	setupDraw(p);
 	setupTreasure(p);
-	generateHazards(p);
+	setupHazards(p);
 	setupPlayer(p);
 
 	player = newPlayer();
