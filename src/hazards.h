@@ -16,7 +16,7 @@ typedef struct {
 	float width, height;
 } Hazard;
 
-void generateHazards(void);
+void generateHazards(PlaydateAPI *p);
 bool processHazards(Player player);
 void drawHazards(PlaydateAPI *pd, int offsetY);
 

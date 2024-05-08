@@ -30,7 +30,7 @@ void setup(PlaydateAPI *p) {
 	loadFonts(p);
 	setupDraw(p);
 	setupTreasure(p);
-	generateHazards();
+	generateHazards(p);
 	setupPlayer(p);
 
 	player = newPlayer();
@@ -58,8 +58,8 @@ int update(void *ud) {
 		offsetY = FLOOR_LEVEL - LCD_ROWS - 2;
 	}
 	drawWater(offsetY);
-	drawGold(pd, offsetY);
-	drawHazards(pd, offsetY);
+	drawGold(offsetY);
+	drawHazards(offsetY);
 	drawPlayer(player, pd->system->getCrankAngle(), rudderStrength, heldScore);
 
 	drawHUD(player, score);

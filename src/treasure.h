@@ -18,6 +18,6 @@ typedef struct {
 
 void setupTreasure(PlaydateAPI *p);
 void processGold(Player player, int *score);
-void drawGold(PlaydateAPI *pd, int offsetY);
+void drawGold(int offsetY);
 
 #endif /* treasure_h */

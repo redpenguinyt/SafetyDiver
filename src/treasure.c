@@ -49,7 +49,7 @@ void processGold(Player player, int *score) {
 	}
 }
 
-void drawGold(PlaydateAPI *pd, int offsetY) {
+void drawGold(int offsetY) {
 	for (size_t i = 0; i < (sizeof(gold) / sizeof(GoldPiece)); i++) {
 		gold[i].t += 0.05f;
 

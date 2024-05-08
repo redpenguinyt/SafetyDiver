@@ -6,6 +6,7 @@
 
 #include "utils/rensutils.h"
 
+static PlaydateAPI *pd = NULL;
 static Hazard hazards[24];
 
 void randomiseHazard(Hazard *hazard) {
@@ -22,7 +23,9 @@ bool isPosInHazard(Vec2F pos, Hazard hazard) {
 
 // Public
 
-void generateHazards(void) {
+void setupHazards(PlaydateAPI *p) {
+	pd = p;
+
 	for (size_t i = 0; i < (sizeof(hazards) / sizeof(Hazard)); i++) {
 		randomiseHazard(&hazards[i]);
 	}
@@ -38,7 +41,7 @@ bool processHazards(Player player) {
 	return false;
 }
 
-void drawHazards(PlaydateAPI *pd, int offsetY) {
+void drawHazards(int offsetY) {
 	for (size_t i = 0; i < (sizeof(hazards) / sizeof(Hazard)); i++) {
 		pd->graphics->drawRect(hazards[i].pos.x, hazards[i].pos.y - offsetY, hazards[i].width, hazards[i].height, 0);
 	}
