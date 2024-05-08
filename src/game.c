@@ -54,6 +54,9 @@ int update(void *ud) {
 	playerSounds(player);
 
 	int offsetY = player.pos.y + player.vel.y * 5.0f - 120.0f;
+	if (player.pos.y > FLOOR_LEVEL - LCD_ROWS / 2) {
+		offsetY = FLOOR_LEVEL - LCD_ROWS - 2;
+	}
 	drawWater(offsetY);
 	drawGold(pd, offsetY);
 	drawHazards(pd, offsetY);
