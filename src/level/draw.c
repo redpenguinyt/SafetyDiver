@@ -4,14 +4,20 @@
 
 #include "draw.h"
 
-#include "../utils/fonts.h"	 // for Pedallica font
-#include "../utils/rensutils.h" // for lazyLoadSpritesheetAtPath
+#include "../utils/fonts.h" // for Pedallica font
 #include "../utils/pd_pointer.h"
+#include "../utils/rensutils.h" // for lazyLoadSpritesheetAtPath
 
 const LCDPattern grey20 = {
-	0b01111111, 0b10111111, 0b11011111, 0b11101111, 0b11110111, 0b11111011, 0b11111101,
+	0b01111111,
+	0b10111111,
+	0b11011111,
+	0b11101111,
+	0b11110111,
+	0b11111011,
+	0b11111101,
 	0b11111110, // Bitmap, each byte is a row of pixel
-	0xFF,		0xFF,		0xFF,		0xFF,		0xFF,		0xFF,		0xFF,		0xFF, // Mask, here fully opaque
+	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, // Mask, here fully opaque
 };
 
 void drawWater(float offsetY) {

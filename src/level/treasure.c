@@ -4,8 +4,8 @@
 
 #include "treasure.h"
 
-#include "../utils/rensutils.h"
 #include "../utils/pd_pointer.h"
+#include "../utils/rensutils.h"
 
 static AudioSample *coinSound;
 static SamplePlayer *coinSoundPlayer;
@@ -54,6 +54,6 @@ void drawGold(int offsetY) {
 		float xRadius = ceilf(gold[i].radius * (cosf(gold[i].t) / 2.0f + 0.5f));
 
 		gfx->drawEllipse(gold[i].pos.x - xRadius, gold[i].pos.y - gold[i].radius - offsetY, xRadius * 2,
-								  gold[i].radius * 2, 3, 0, 0, (LCDColor)0);
+						 gold[i].radius * 2, 3, 0, 0, (LCDColor)0);
 	}
 }
