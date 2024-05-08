@@ -44,7 +44,7 @@ void drawPlayer(Player player, float degrees, int heldScore) {
 	}
 
 	float offsetY = LCD_ROWS / 2 - player.vel.y * 5.0f;
-	if (player.pos.y > FLOOR_LEVEL - LCD_ROWS / 2) {
+	if (player.pos.y + player.vel.y * 5.0f > FLOOR_LEVEL - LCD_ROWS / 2) {
 		offsetY = player.pos.y - FLOOR_LEVEL + LCD_ROWS;
 	}
 
