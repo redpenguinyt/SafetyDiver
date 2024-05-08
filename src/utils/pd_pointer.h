@@ -9,11 +9,13 @@
 #include "pd_api.h"
 
 /// A pointer to the Playdate API
-static PlaydateAPI *pd = NULL;
-static const struct playdate_graphics *gfx = NULL;
-static const struct playdate_sound *snd = NULL;
-
+extern PlaydateAPI *pd;
+extern const struct playdate_graphics *gfx;
+extern const struct playdate_sound *snd;
 
 void setupPointer(PlaydateAPI *p);
+PlaydateAPI *getPD(void);
+const struct playdate_graphics *getGFX(void);
+const struct playdate_sound *getSND(void);
 
 #endif /* pd_pointer_h */
