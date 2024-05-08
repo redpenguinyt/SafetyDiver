@@ -4,8 +4,8 @@
 
 #include "hazards.h"
 
-#include "utils/rensutils.h"
 #include "utils/pd_pointer.h"
+#include "utils/rensutils.h"
 
 static Hazard hazards[24];
 
@@ -14,6 +14,20 @@ void randomiseHazard(Hazard *hazard) {
 	hazard->pos.y = WATER_LEVEL + rand() % (FLOOR_LEVEL - WATER_LEVEL);
 	hazard->width = rand() % 100 + 20;
 	hazard->height = rand() % 60 + 10;
+}
+
+void playZapSound(void) {
+	static AudioSample *zapSound;
+	static SamplePlayer *zapSoundPlayer;
+
+	if (zapSound == NULL || zapSoundPlayer == NULL) {
+		zapSound = snd->sample->load("sounds/zap.wav");
+
+		zapSoundPlayer = snd->sampleplayer->newPlayer();
+		snd->sampleplayer->setSample(zapSoundPlayer, zapSound);
+	}
+
+	snd->sampleplayer->play(zapSoundPlayer, 1, 1.0);
 }
 
 // Public
@@ -69,6 +83,10 @@ bool processHazardCollisions(Player *player) {
 				player->pos.x = hazardRight + player->vel.y;
 			}
 		}
+	}
+
+	if (hasCollided) {
+		playZapSound();
 	}
 
 	return hasCollided;
