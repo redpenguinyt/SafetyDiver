@@ -17,7 +17,8 @@ typedef struct {
 } Hazard;
 
 void setupHazards(PlaydateAPI *p);
-bool processHazards(Player player);
-void drawHazards(PlaydateAPI *pd, int offsetY);
+/// Returns true if collided
+bool processHazardCollisions(Player *player);
+void drawHazards(int offsetY);
 
 #endif /* hazards_h */

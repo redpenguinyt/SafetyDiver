@@ -16,11 +16,6 @@ void randomiseHazard(Hazard *hazard) {
 	hazard->height = rand() % 60 + 10;
 }
 
-bool isPosInHazard(Vec2F pos, Hazard hazard) {
-	return pos.x >= hazard.pos.x && pos.x < (hazard.pos.x + hazard.width) && pos.y >= hazard.pos.y &&
-		   pos.y < (hazard.pos.y + hazard.height);
-}
-
 // Public
 
 void setupHazards(PlaydateAPI *p) {
@@ -31,14 +26,54 @@ void setupHazards(PlaydateAPI *p) {
 	}
 }
 
-bool processHazards(Player player) {
+bool processHazardCollisions(Player *player) {
+	bool hasCollided = false;
+
 	for (size_t i = 0; i < (sizeof(hazards) / sizeof(Hazard)); i++) {
-		if (isPosInHazard(player.pos, hazards[i])) {
-			return true;
+		float hazardLeft = hazards[i].pos.x;
+		float hazardTop = hazards[i].pos.y;
+		float hazardRight = hazards[i].pos.x + hazards[i].width;
+		float hazardBottom = hazards[i].pos.y + hazards[i].height;
+
+		// Vertical collisions
+		if (player->pos.x > hazardLeft && player->pos.x < hazardRight) {
+			// Top edge
+			if (player->pos.y > hazardTop && player->pos.y - player->vel.y < hazardTop) {
+				hasCollided = true;
+				player->vel.y /= -6;
+				player->pos.y = hazardTop + player->vel.y;
+			}
+			// Bottom edge
+			if (player->pos.y < hazardBottom && player->pos.y - player->vel.y > hazardBottom) {
+				hasCollided = true;
+				player->vel.y /= -6;
+				player->pos.y = hazardBottom + player->vel.y;
+			}
+		}
+		// Horizontal collisions
+		if (player->pos.y > hazardTop && player->pos.y < hazardBottom) {
+			// Left edge
+			if (player->pos.x > hazardLeft && player->pos.x - player->vel.x <= hazardLeft) {
+				hasCollided = true;
+				player->vel.x /= -6;
+				if (player->vel.x > -1.0f) {
+					player->vel.x = -1.0f;
+				}
+				player->pos.x = hazardLeft + player->vel.y;
+			}
+			// Right edge
+			if (player->pos.x < hazardRight && player->pos.x - player->vel.x >= hazardRight) {
+				hasCollided = true;
+				player->vel.x /= -6;
+				if (player->vel.x < 1.0f) {
+					player->vel.x = 1.0f;
+				}
+				player->pos.x = hazardRight + player->vel.y;
+			}
 		}
 	}
 
-	return false;
+	return hasCollided;
 }
 
 void drawHazards(int offsetY) {

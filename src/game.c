@@ -44,7 +44,7 @@ int update(void *ud) {
 	float rudderStrength = playerMovement(&player, deltaTime);
 	processPlayerPhysics(&player, deltaTime);
 	processGold(player, &heldScore);
-	if (processHazards(player)) {
+	if (processHazardCollisions(&player)) {
 		heldScore = 0;
 	}
 	if (player.pos.y < WATER_LEVEL) {
