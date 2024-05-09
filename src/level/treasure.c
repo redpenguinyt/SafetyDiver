@@ -7,9 +7,6 @@
 #include "../utils/pd_pointer.h"
 #include "../utils/rensutils.h"
 
-static AudioSample *coinSound;
-static SamplePlayer *coinSoundPlayer;
-
 static GoldPiece gold[64];
 
 void randomiseGold(GoldPiece *goldPiece) {
@@ -19,13 +16,22 @@ void randomiseGold(GoldPiece *goldPiece) {
 	goldPiece->t = rand() % 6;
 }
 
+void playCoinSound(void) {
+	static AudioSample *coinSound;
+	static SamplePlayer *coinSoundPlayer;
+
+	if (coinSound == NULL) {
+		coinSound = snd->sample->load("sounds/coin.wav");
+		coinSoundPlayer = snd->sampleplayer->newPlayer();
+		snd->sampleplayer->setSample(coinSoundPlayer, coinSound);
+	}
+
+	snd->sampleplayer->play(coinSoundPlayer, 1, 1.0f);
+}
+
 // Public
 
-void setupTreasure(void) {
-	coinSound = snd->sample->load("sounds/coin.wav");
-	coinSoundPlayer = snd->sampleplayer->newPlayer();
-	snd->sampleplayer->setSample(coinSoundPlayer, coinSound);
-
+void regenerateGoldPositions(void) {
 	for (size_t i = 0; i < (sizeof(gold) / sizeof(GoldPiece)); i++) {
 		randomiseGold(&gold[i]);
 	}
@@ -41,7 +47,7 @@ void processGold(Player player, int *score) {
 		if (distance < player.radius + gold[i].radius) {
 			*score += 1;
 			randomiseGold(&gold[i]);
-			snd->sampleplayer->play(coinSoundPlayer, 1, 1.0f);
+			playCoinSound();
 		}
 	}
 }

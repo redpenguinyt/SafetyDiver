@@ -53,7 +53,7 @@ void setup(PlaydateAPI *p) {
 	pd->display->setRefreshRate(50);
 
 	loadFonts();
-	setupTreasure();
+	regenerateGoldPositions();
 	setupHazards();
 
 	player = newPlayer();

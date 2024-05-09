@@ -13,7 +13,7 @@ typedef struct {
 	float t;
 } GoldPiece;
 
-void setupTreasure(void);
+void regenerateGoldPositions(void);
 void processGold(Player player, int *score);
 void drawGold(int offsetY);
 
