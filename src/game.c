@@ -42,10 +42,12 @@ int update(void *ud) {
 				restartLevel();
 			}
 
+			lazyLoadImageAtPath(gameOverImage, "images/game_over.png");
+			gfx->drawBitmap(gameOverImage, 0, 0, kBitmapUnflipped);
+
 			static char *gameOverText;
-			sys->formatString(&gameOverText, "You died, your score was %d", score);
-			gfx->drawText(gameOverText, strlen(gameOverText), kASCIIEncoding, 10, 10);
-			gfx->drawText("Press A to restart", 19, kUTF8Encoding, 10, 40);
+			sys->formatString(&gameOverText, "You collected %d gold pieces", score);
+			gfx->drawText(gameOverText, strlen(gameOverText), kASCIIEncoding, 149, 91);
 
 			break;
 	}
