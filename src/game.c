@@ -21,6 +21,20 @@ static int score = 0;
 static int heldScore = 0;
 static bool zapped = false;
 
+void playTreasureCollectSound(void) {
+	static AudioSample *treasureCollectSound;
+	static SamplePlayer *treasureCollectSoundPlayer;
+
+	if (treasureCollectSound == NULL || treasureCollectSoundPlayer == NULL) {
+		treasureCollectSound = snd->sample->load("sounds/treasure_collect.wav");
+
+		treasureCollectSoundPlayer = snd->sampleplayer->newPlayer();
+		snd->sampleplayer->setSample(treasureCollectSoundPlayer, treasureCollectSound);
+	}
+
+	snd->sampleplayer->play(treasureCollectSoundPlayer, 1, 1.0);
+}
+
 void process(float deltaTime) {
 	if (gameState == kGameStatePlaying) {
 		playerMovement(&player, deltaTime);
@@ -35,6 +49,9 @@ void process(float deltaTime) {
 		if (player.pos.y < WATER_LEVEL && player.pos.y - player.vel.y > WATER_LEVEL) {
 			if (heldScore == 0 && zapped) {
 				gameState = kGameStateOver;
+			}
+			if (heldScore > 0) {
+				playTreasureCollectSound();
 			}
 
 			score += heldScore;
