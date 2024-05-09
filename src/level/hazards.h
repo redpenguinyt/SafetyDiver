@@ -13,7 +13,7 @@ typedef struct {
 	float width, height;
 } Hazard;
 
-void setupHazards(void);
+void regenerateHazards(void);
 /// Returns true if collided
 bool processHazardCollisions(Player *player);
 void drawHazards(int offsetY);

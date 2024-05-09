@@ -32,7 +32,7 @@ void playZapSound(void) {
 
 // Public
 
-void setupHazards(void) {
+void regenerateHazards(void) {
 	for (size_t i = 0; i < (sizeof(hazards) / sizeof(Hazard)); i++) {
 		randomiseHazard(&hazards[i]);
 	}
