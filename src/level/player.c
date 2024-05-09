@@ -7,6 +7,17 @@
 #include "../utils/pd_pointer.h"
 #include "../utils/rensutils.h"
 
+PDSynth *createSynth(SoundWaveform waveform, float attack, float decay, float sustain, float release) {
+	PDSynth *synth = snd->synth->newSynth();
+	snd->synth->setWaveform(synth, waveform);
+	snd->synth->setAttackTime(synth, attack);
+	snd->synth->setDecayTime(synth, decay);
+	snd->synth->setSustainLevel(synth, sustain);
+	snd->synth->setReleaseTime(synth, release);
+
+	return synth;
+}
+
 Player newPlayer(void) {
 	Player player;
 
@@ -49,5 +60,26 @@ void playerSounds(Player player) {
 		}
 
 		snd->sampleplayer->play(splashSoundPlayer, 1, 1.0);
+	}
+
+	if (player.rudderStrength > 0) {
+		static SoundChannel *motorChannel = NULL;
+		static PDSynth *motorSynth = NULL;
+		static TwoPoleFilter *twoPoleFilter = NULL;
+
+		if (motorSynth == NULL) {
+			motorChannel = snd->channel->newChannel();
+			motorSynth = createSynth(kWaveformPOVosim, 0.2, 0.1, 0.9, 0.1);
+			snd->channel->addSource(motorChannel, (SoundSource *)motorSynth);
+
+			twoPoleFilter = snd->effect->twopolefilter->newFilter();
+			snd->effect->twopolefilter->setType(twoPoleFilter, kFilterTypeLowPass);
+			snd->effect->twopolefilter->setFrequency(twoPoleFilter, 150);
+
+			snd->channel->addEffect(motorChannel, (SoundEffect *)twoPoleFilter);
+		}
+
+		// TODO: change sound when player is above water
+		snd->synth->playNote(motorSynth, 76.0, 1.0, 0.1, 0);
 	}
 }
