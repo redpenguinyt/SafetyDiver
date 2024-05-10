@@ -62,7 +62,9 @@ void drawPlayer(Player player, float degrees, int heldScore) {
 		char *heldScoreText;
 		sys->formatString(&heldScoreText, "%d", heldScore);
 
-		gfx->drawText(heldScoreText, strlen(heldScoreText), kASCIIEncoding, player.pos.x + 15, offsetY - 15);
+		int heldScoreTextOffsetX = degrees < 180 ? 15 : -22;
+
+		gfx->drawText(heldScoreText, strlen(heldScoreText), kASCIIEncoding, player.pos.x + heldScoreTextOffsetX, offsetY - 20);
 	}
 }
 
