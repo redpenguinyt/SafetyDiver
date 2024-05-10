@@ -4,7 +4,22 @@
 
 #include "physics.h"
 
+#include "../utils/pd_pointer.h" // For snd library
 #include "../utils/rensutils.h"
+
+void playWallHitSound(void) {
+	static AudioSample *bonkSound;
+	static SamplePlayer *bonkSoundPlayer;
+
+	if (bonkSound == NULL || bonkSoundPlayer == NULL) {
+		bonkSound = snd->sample->load("sounds/bonk.wav");
+
+		bonkSoundPlayer = snd->sampleplayer->newPlayer();
+		snd->sampleplayer->setSample(bonkSoundPlayer, bonkSound);
+	}
+
+	snd->sampleplayer->play(bonkSoundPlayer, 1, 1.0);
+}
 
 float calculateDisplacedWater(Player *player) {
 	// Exit if above water level
@@ -59,14 +74,23 @@ void processPlayerPhysics(Player *player, float delta) {
 
 	// Hitting walls
 	if (player->pos.x < 0) {
+		if (player->vel.x < -1) {
+			playWallHitSound();
+		}
 		player->pos.x = 0;
 		player->vel.x /= -6.0f;
 	}
 	if (player->pos.x > LCD_COLUMNS) {
+		if (player->vel.x > 1) {
+			playWallHitSound();
+		}
 		player->pos.x = LCD_COLUMNS;
 		player->vel.x /= -6.0f;
 	}
 	if (player->pos.y > FLOOR_LEVEL) {
+		if (player->vel.y > 1) {
+			playWallHitSound();
+		}
 		player->pos.y = FLOOR_LEVEL;
 		player->vel.y = -fabsf(player->vel.y / 6.0f);
 	}
