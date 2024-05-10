@@ -69,17 +69,27 @@ void playerSounds(Player player) {
 
 		if (motorSynth == NULL) {
 			motorChannel = snd->channel->newChannel();
-			motorSynth = createSynth(kWaveformPOVosim, 0.2, 0.1, 0.9, 0.1);
+			motorSynth = createSynth(kWaveformNoise, 0.2, 0.1, 0.9, 0.1);
 			snd->channel->addSource(motorChannel, (SoundSource *)motorSynth);
 
 			twoPoleFilter = snd->effect->twopolefilter->newFilter();
 			snd->effect->twopolefilter->setType(twoPoleFilter, kFilterTypeLowPass);
-			snd->effect->twopolefilter->setFrequency(twoPoleFilter, 150);
 
 			snd->channel->addEffect(motorChannel, (SoundEffect *)twoPoleFilter);
 		}
 
-		// TODO: change sound when player is above water
-		snd->synth->playNote(motorSynth, 76.0, 1.0, 0.1, 0);
+		if (player.rudderStrength == 5) {
+			snd->effect->twopolefilter->setFrequency(twoPoleFilter, 300);
+			snd->channel->setVolume(motorChannel, 0.4);
+			snd->synth->setWaveform(motorSynth, kWaveformNoise);
+		} else {
+			snd->effect->twopolefilter->setFrequency(twoPoleFilter, 400);
+			snd->channel->setVolume(motorChannel, 1.0);
+			snd->synth->setWaveform(motorSynth, kWaveformPOVosim);
+		}
+
+		float velocity = sqrtf(powf(player.vel.x, 2) + powf(player.vel.y, 2));
+
+		snd->synth->playNote(motorSynth, ((velocity - 1) * 0.3 + 1) * 76.0, 1.0, 0.1, 0);
 	}
 }
