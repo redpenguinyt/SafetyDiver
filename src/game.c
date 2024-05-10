@@ -17,6 +17,7 @@ static float deltaTime;
 void setup(PlaydateAPI *p) {
 	setupPointer(p);
 	pd->display->setRefreshRate(50);
+	snd->channel->setVolume(snd->getDefaultChannel(), 0.1);
 	loadFonts();
 
 	restartLevel();
