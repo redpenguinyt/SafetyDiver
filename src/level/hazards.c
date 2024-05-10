@@ -53,12 +53,18 @@ bool processHazardCollisions(Player *player) {
 			if (player->pos.y > hazardTop && player->pos.y - player->vel.y < hazardTop) {
 				hasCollided = true;
 				player->vel.y /= -6;
+				if (player->vel.y > -1.0f) {
+					player->vel.y = -1.0f;
+				}
 				player->pos.y = hazardTop + player->vel.y;
 			}
 			// Bottom edge
 			if (player->pos.y < hazardBottom && player->pos.y - player->vel.y > hazardBottom) {
 				hasCollided = true;
 				player->vel.y /= -6;
+				if (player->vel.y < 1.0f) {
+					player->vel.y = 1.0f;
+				}
 				player->pos.y = hazardBottom + player->vel.y;
 			}
 		}
