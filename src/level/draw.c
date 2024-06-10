@@ -8,7 +8,7 @@
 #include "../utils/pd_pointer.h"
 #include "../utils/rensutils.h" // for lazyLoadSpritesheetAtPath
 
-const LCDPattern grey20 = {
+const LCDPattern grey20 = LCDOpaquePattern(
 	0b01111111,
 	0b10111111,
 	0b11011111,
@@ -16,9 +16,8 @@ const LCDPattern grey20 = {
 	0b11110111,
 	0b11111011,
 	0b11111101,
-	0b11111110, // Bitmap, each byte is a row of pixel
-	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, // Mask, here fully opaque
-};
+	0b11111110
+);
 
 void drawWater(float offsetY) {
 	static LCDBitmap *waterImage = NULL;
@@ -64,7 +63,8 @@ void drawPlayer(Player player, float degrees, int heldScore) {
 
 		int heldScoreTextOffsetX = degrees < 180 ? 15 : -22;
 
-		gfx->drawText(heldScoreText, strlen(heldScoreText), kASCIIEncoding, player.pos.x + heldScoreTextOffsetX, offsetY - 20);
+		gfx->drawText(heldScoreText, strlen(heldScoreText), kASCIIEncoding, player.pos.x + heldScoreTextOffsetX,
+					  offsetY - 20);
 	}
 }
 
