@@ -13,7 +13,7 @@ ifeq ($(SDK),)
 $(error SDK path not found; set ENV value PLAYDATE_SDK_PATH)
 endif
 
-# Get all c files in src directory as source files
+# List C source files here
 SRC = $(shell find src/ -name '*.c')
 
 # List all user directories here
@@ -23,7 +23,7 @@ UINCDIR =
 UASRC =
 
 # List all user C define here, like -D_DEBUG=1
-UDEFS =
+USER_DEFS =
 
 # Define ASM defines here
 UADEFS =
@@ -34,4 +34,11 @@ ULIBDIR =
 # List all user libraries here
 ULIBS =
 
+UDEFS = $(USER_DEFS) -fsingle-precision-constant
+override GCCFLAGS := $(USER_DEFS) -g
+
 include $(SDK)/C_API/buildsupport/common.mk
+
+run: all
+	$(info Running built PDX in Simulator)
+	$(SDK)/bin/PlaydateSimulator $(PRODUCT)
