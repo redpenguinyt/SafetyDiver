@@ -5,7 +5,6 @@
 #ifndef game_h
 #define game_h
 
-#define TARGET_EXTENSION 1
 #include "pd_api.h"
 
 void setup(PlaydateAPI *p);
