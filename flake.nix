@@ -13,13 +13,9 @@
       stdenv = pkgs.stdenv;
       playdate-sdk-pkg = playdate-sdk.packages.${system}.default;
     in {
-      devShells.x86_64-linux.default = pkgs.mkShell {
+      devShells.${system}.default = pkgs.mkShell {
         packages = [playdate-sdk-pkg];
-
-        nativeBuildInputs = with pkgs; [
-          gcc-arm-embedded
-        ];
-
+        nativeBuildInputs = [ pkgs.gcc-arm-embedded ];
         PLAYDATE_SDK_PATH = "${playdate-sdk-pkg}";
       };
     };
